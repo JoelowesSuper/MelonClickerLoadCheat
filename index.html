@@ -39,7 +39,7 @@
 <button id="save-btn">Save</button>
 
 <script>
-    // List of words
+    // List of words (just for generating the input fields, will not be included in output)
     const words = [
         "background", "cb price", "current effect", "cutting board", "gardens", "melon coins",
         "melon coins bought", "melon multiplier", "Melons", "melons per second", "mg price",
@@ -56,7 +56,7 @@
         
         const input = document.createElement("input");
         input.type = "text";
-        input.placeholder = "Enter value";
+        input.placeholder = "Enter number";
         
         const label = document.createElement("label");
         label.textContent = word;
@@ -72,10 +72,10 @@
         let result = "";
 
         inputs.forEach((input, index) => {
-            result += `(${input.value})${words[index]}|`;
+            result += `${input.value}|`;
         });
 
-        // Copy to clipboard
+        // Copy to clipboard, removing the last |
         navigator.clipboard.writeText(result.slice(0, -1))
             .then(() => alert("Copied to clipboard!"))
             .catch(err => console.error("Failed to copy text: ", err));
@@ -84,4 +84,3 @@
 
 </body>
 </html>
-
