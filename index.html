@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Input Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-group input[type="text"] {
+            width: 150px;
+            margin-right: 10px;
+        }
+        .input-group label {
+            font-weight: bold;
+        }
+        #save-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Generate Inputs and Copy to Clipboard</h1>
+
+<div id="inputs-container"></div>
+
+<button id="save-btn">Save</button>
+
+<script>
+    // List of words
+    const words = [
+        "background", "cb price", "current effect", "cutting board", "gardens", "melon coins",
+        "melon coins bought", "melon multiplier", "Melons", "melons per second", "mg price",
+        "mm price", "more melons", "mps no mf", "nnw description", "nnw price", "nnw shop name",
+        "random effect", "sound"
+    ];
+
+    const container = document.getElementById("inputs-container");
+
+    // Generate input fields for each word
+    words.forEach(word => {
+        const inputGroup = document.createElement("div");
+        inputGroup.className = "input-group";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Enter value";
+        
+        const label = document.createElement("label");
+        label.textContent = word;
+
+        inputGroup.appendChild(input);
+        inputGroup.appendChild(label);
+        container.appendChild(inputGroup);
+    });
+
+    // Save button function to copy all inputs to clipboard
+    document.getElementById("save-btn").addEventListener("click", () => {
+        const inputs = document.querySelectorAll(".input-group input");
+        let result = "";
+
+        inputs.forEach((input, index) => {
+            result += `(${input.value})${words[index]}|`;
+        });
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(result.slice(0, -1))
+            .then(() => alert("Copied to clipboard!"))
+            .catch(err => console.error("Failed to copy text: ", err));
+    });
+</script>
+
+</body>
+</html>
 
